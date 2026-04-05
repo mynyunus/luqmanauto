@@ -1,0 +1,21 @@
+{
+  "name": "luqmanauto",
+  "compatibility_date": "2024-09-23",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./public"
+  },
+  "build": {
+    "command": "rm -rf public && mkdir -p public && cp index.html proton.html perodua.html styles.css script.js README.md public/ && cp -R assets proton perodua public/"
+  },
+  "routes": [
+    {
+      "pattern": "luqmanauto.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.luqmanauto.com",
+      "custom_domain": true
+    }
+  ]
+}
