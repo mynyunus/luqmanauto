@@ -931,6 +931,23 @@ svg {
   top: 0.67rem;
 }
 
+.proton-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.proton-gallery-photo {
+  min-height: 0;
+}
+
+.proton-gallery-photo img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
 .feature-grid,
 .brand-grid,
 .model-grid,
@@ -1643,6 +1660,10 @@ svg {
 
   .feature-grid,
   .model-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .proton-gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
