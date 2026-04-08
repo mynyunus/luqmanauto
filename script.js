@@ -109,6 +109,65 @@
     }
   });
 
+  const normalizePath = (pathname) => {
+    if (!pathname) return "/";
+    const trimmed = pathname.replace(/\/+$/, "");
+    return trimmed || "/";
+  };
+
+  const getTikTokViewContentMeta = () => {
+    const path = normalizePath(window.location.pathname);
+
+    if (path === "/" || path === "/index.html") {
+      return {
+        contentId: "luqmanauto_home",
+        contentName: "Luqman Auto Home"
+      };
+    }
+
+    if (path === "/proton" || path === "/proton.html") {
+      return {
+        contentId: "luqmanauto_proton",
+        contentName: "Luqman Auto Proton"
+      };
+    }
+
+    if (path === "/perodua" || path === "/perodua.html") {
+      return {
+        contentId: "luqmanauto_perodua",
+        contentName: "Luqman Auto Perodua"
+      };
+    }
+
+    const fallbackId = path.replace(/[^a-zA-Z0-9]+/g, "_").replace(/^_+|_+$/g, "").toLowerCase() || "luqmanauto_page";
+    return {
+      contentId: `luqmanauto_${fallbackId}`,
+      contentName: document.title || "Luqman Auto Page"
+    };
+  };
+
+  const trackTikTokViewContent = () => {
+    if (!window.ttq || typeof window.ttq.track !== "function") return;
+
+    const { contentId, contentName } = getTikTokViewContentMeta();
+    const payload = {
+      content_id: contentId,
+      content_type: "product_group",
+      content_name: contentName,
+      contents: [
+        {
+          content_id: contentId,
+          content_type: "product_group",
+          content_name: contentName
+        }
+      ]
+    };
+
+    window.ttq.track("ViewContent", payload);
+  };
+
+  trackTikTokViewContent();
+
   document.querySelectorAll("[data-loan-calculator]").forEach((form) => {
     const result = form.querySelector("[data-calc-result]");
     const sendLink = form.querySelector("[data-calc-send]");
